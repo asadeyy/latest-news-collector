@@ -21,12 +21,17 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Gemini CLI設定ディレクトリとresultsディレクトリを作成
-RUN mkdir -p /root/.config/gemini-cli /app/results
+RUN mkdir -p /root/.gemini /app/results
 
-# Gemini CLI設定とアプリケーションファイルをコピー
-COPY settings.json /root/.config/gemini-cli/settings.json
+# アプリケーションファイルをコピー
 COPY main.py .
+COPY test_slack_dm.py .
+COPY entrypoint.sh /entrypoint.sh
+
+# エントリーポイントスクリプトに実行権限を付与
+RUN chmod +x /entrypoint.sh
 
 ENV GEMINI_API_KEY=""
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["python", "main.py"]
