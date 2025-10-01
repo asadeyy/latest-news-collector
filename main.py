@@ -94,7 +94,7 @@ def collect_information_with_cli(interest: str, max_retries: int = 3) -> str:
 
 ユーザーの興味: {interest}
 
-上記の指示に従って、最新情報を収集してください。"""
+上記の指示に従って、最新情報を収集してください。十分な情報が得られるまで、必要に応じて検索を繰り返してください。"""
 
     for attempt in range(1, max_retries + 1):
         print(f"[Gemini CLI] 情報収集を開始します... (試行 {attempt}/{max_retries})\n")
